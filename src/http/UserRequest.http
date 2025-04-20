@@ -1,0 +1,66 @@
+### create admin
+POST http://localhost:8080/user/sign-up
+Content-Type: application/json
+
+{
+  "username": "admin1",
+  "password": "",
+  "role": "ADMIN"
+}
+
+### admin login
+POST http://localhost:8080/user/sign-in
+Content-Type: application/json
+
+{
+  "username": "admin1"
+}
+
+> {%
+  client.global.set("adminJwt", response.headers.valueOf("token"));
+%}
+
+### make coupon
+POST http://localhost:8080/coupon
+Content-Type: application/json
+Authorization: Bearer {{adminJwt}}
+
+{
+  "couponType": "PIZZA",
+  "amount": 100,
+  "expireTime": "2125-05-20T10:10:20"
+}
+
+
+### user create
+POST http://localhost:8080/user/sign-up
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "",
+  "role": "USER"
+}
+
+### user login
+POST http://localhost:8080/user/sign-in
+Content-Type: application/json
+
+{
+  "username": "user1"
+}
+
+> {%
+  client.global.set("userJwt", response.headers.valueOf("token"));
+  client.log("Auth Token : " + client.global.get("userJwt"));
+%}
+
+### 유저가 쿠폰 발급 받기
+POST http://localhost:8080/user/coupon/1
+Content-Type: application/json
+Authorization: Bearer {{userJwt}}
+
+### 유저가 쿠폰 사용
+PUT http://localhost:8080/user/coupon/1
+Content-Type: application/json
+Authorization: Bearer {{userJwt}}
