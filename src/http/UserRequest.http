@@ -26,9 +26,9 @@ Content-Type: application/json
 Authorization: Bearer {{adminJwt}}
 
 {
-  "couponType": "PIZZA",
+  "coupon_type": "PIZZA",
   "amount": 100,
-  "expireTime": "2125-05-20T10:10:20"
+  "expire_time": "2125-05-20T10:10:20"
 }
 
 
