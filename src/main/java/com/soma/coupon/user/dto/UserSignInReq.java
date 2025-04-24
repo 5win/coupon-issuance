@@ -1,11 +1,5 @@
 package com.soma.coupon.user.dto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+public record UserSignInReq(String username) {
 
-@Getter
-@RequiredArgsConstructor
-public class UserSignInReq {
-
-    private final String username;
 }
